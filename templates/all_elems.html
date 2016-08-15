@@ -1,0 +1,13 @@
+<html>
+    <head>
+        <title>All Elements in the Database</title>
+    </head>
+<body>
+<h4>All the elements</h4>
+<ul>
+{% for _ in range(the_data.__len__()) %}
+   <li>{{ the_data.popitem(last=False)[1][:5] }}</li>
+{% endfor %}
+<ul>
+</body>
+</html>
