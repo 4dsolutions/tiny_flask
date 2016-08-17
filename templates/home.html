@@ -7,20 +7,27 @@
  <body onload="sponsored_by()"> 
     <h4>Here's the API:</h4>
     (<i>returns JSON</i>)<br />
-    <br />/api/elements?elem=H
-    <br />/api/glossary?term=AJAX
+    <br /><a href="/api/elements?elem=H">/api/elements?elem=H</a>
+    <br /><a href="/api/glossary?term=AJAX">/api/glossary?term=AJAX</a>
+<br />
+    <br /><a href="/api/elements?elem=all">/api/elements?elem=all</a>
+    <br /><a href="/api/glossary?term=all">/api/glossary?term=all</a>
+    
 <br />
 <h4>More options:</h4>
     (<i>returns HTML</i>)<br />
-    <br />/elements/
-    <br />/elements/H
-    <br />/elements/all<br />
+    <br /><a href="/elements">/elements</a>
+    <br /><a href="/elements/H">/elements/H</a>
+    <br /><a href="/elements/all">/elements/all</a><br />
 <br />
-with parallel API for /glossary (not implemented yet)<br />
+with parallel API for /glossary<br />
 <br />
-Only a few elements entered, POST method works from<br />
-localhost using simple Python script with requests<br /> 
-module imported.<br />
+    <br /><a href="/glossary">/glossary</a>
+    <br /><a href="/glossary/.NET">/glossary/.NET</a>
+    <br /><a href="/glossary/all">/glossary/all</a><br />
+<br />
+POST method implemented, for adding to either database.<br />
+<br />
 <br />
 <span id="sponsor"></span>
 </body>
