@@ -86,10 +86,43 @@ class glossaryDB:
      
     def seek(self, term):
         if self.conn:
+            if term != "all":
+                query = ("SELECT * FROM Glossary "
+                "WHERE gl_term = '{}'".format(term))
+                self.curs.execute(query)
+                result = self.curs.fetchone()
+                if result:
+                    return json.dumps(list(result))
+            else:
+                query = "SELECT * FROM Glossary ORDER BY gl_term"
+                self.curs.execute(query)
+                result={}
+                for row in self.curs.fetchall():
+                    result[row[1]] = list(row)
+                return json.dumps(result)                
+        return "NOT FOUND"
+    
+    def save(self, the_data):
+        term = the_data["gl_term"]
+        if self.conn:
             query = ("SELECT * FROM Glossary "
             "WHERE gl_term = '{}'".format(term))
             self.curs.execute(query)
             result = self.curs.fetchone()
             if result:
-                return json.dumps(list(result))
+                return "ALREADY IN DB"
+            else:
+                d = {}
+                d.update(the_data.to_dict(flat=True)) # the_data is immutable
+                d["initials"]="KTU"
+                d["right_now"]=mod_date()
+                query = ("INSERT INTO Glossary "
+                "(gl_term, gl_definition, "
+                "updated_at, updated_by) "
+                "VALUES ('{gl_term}', '{gl_definition}', {right_now}, '{initials}')")
+                query = query.format(**d)
+                print(query)
+                self.curs.execute(query)
+                self.conn.commit()
+                return "POST SUCCESSFUL"
         return "NOT FOUND"

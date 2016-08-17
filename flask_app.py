@@ -21,10 +21,9 @@ def elements():
 
 @app.route("/elements/<symbol>")
 def element_page(symbol):
-    result ="NOT FOUND"
     with Connector(elemsDB(DB1)) as dbx:
         result = dbx.seek(symbol)
-    if result != "NOT FOUND":
+    if "NOT FOUND" != result:
         if symbol != 'all':
             data = json.loads(result)
             return render_template("elem_page.html", 
@@ -60,19 +59,41 @@ def get_elements():
         
 @app.route("/glossary")
 def glossary():
-    return render_template("elements.html")
+    return render_template("glossary.html")
 
-@app.route("/api/glossary", methods=['GET'])
-def get_glossary():
+@app.route("/glossary/<term>")
+def get_glossary(term):
+    with Connector(glossaryDB(DB2)) as dbx:
+        result = dbx.seek(term)
+    if "NOT FOUND" != result:
+        if term != 'all':
+            data = json.loads(result)
+            return render_template("term_page.html", 
+                                the_term = data[0],
+                                the_definition = data[1])
+        else:
+            data = json.loads(result)
+            data = collections.OrderedDict(sorted(data.items(), 
+                                            key=lambda k: k[1][0]))
+            return render_template("all_terms.html", the_data=data)
+
+@app.route("/api/glossary", methods=['GET', 'POST'])
+def get_terms():
     if request.method == "GET":
-        elem = request.args.get('term')
+        term = request.args.get('term')
         result="NOT FOUND"
         with Connector(glossaryDB(DB2)) as dbx:
-            result = dbx.seek(elem) 
+            result = dbx.seek(term) 
         if result != "NOT FOUND":
             return result
-        return render_template("glossary.html")
-    
+        return render_template("terms.html")
+    if request.method == "POST":
+        if request.form["secret"]=="DADA":
+            with Connector(glossaryDB(DB2)) as dbx:
+                result = dbx.save(request.form)
+            return result
+        return "Oooo, you tried to post!"
+        
 if __name__ == '__main__':
     app.run(port=5000, debug=True)
 
