@@ -4,14 +4,15 @@
     <script src="../static/js/home.js"></script>
         <title>A RESTful Flask App</title>
     </head>
-<body>
+ <body onload="sponsored_by()"> 
     <h4>Here's the API:</h4>
     (<i>returns JSON</i>)<br />
     <br />/api/elements?elem=H
     <br />/api/glossary?term=AJAX
 <br />
 <h4>More options:</h4>
-          /elements/
+    (<i>returns HTML</i>)<br />
+    <br />/elements/
     <br />/elements/H
     <br />/elements/all<br />
 <br />
@@ -20,5 +21,7 @@ with parallel API for /glossary (not implemented yet)<br />
 Only a few elements entered, POST method works from<br />
 localhost using simple Python script with requests<br /> 
 module imported.<br />
+<br />
+<span id="sponsor"></span>
 </body>
 </html>

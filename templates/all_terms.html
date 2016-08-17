@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    	<link rel="stylesheet" type="text/css" href="../static/css/any_term.css">
+        <title>All Terms in the Glossary</title>
+    </head>
+<body>
+<h4>All the terms</h4>
+<table>
+<tr><th>Term</th><th>Definition</th></tr>
+{% for item in the_data.items() %}
+<tr>
+   <td>{{ item[1][0] }}</td>
+   <td>{{ item[1][1] }}</td>
+</tr>
+{% endfor %}
+</table>
+</body>
+</html>
