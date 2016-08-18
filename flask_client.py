@@ -42,14 +42,14 @@ Jinja2 templates
 import requests
 
 data = {}
-data["protons"]=22
-data["symbol"]="Ti"
-data["long_name"]="Titanium"
-data["mass"]=47.867
+data["protons"]=30
+data["symbol"]="Zn"
+data["long_name"]="Zinc"
+data["mass"]=65.38
 data["series"]="Transition metal"
-data["secret"]="***" # <--- primitive authentication
+data["secret"]="DANyoob" # <--- primitive authentication
 
-the_url = 'http://localhost:5000/api/elements'
+# the_url = 'http://localhost:5000/api/elements'
 the_url = 'http://thekirbster.pythonanywhere.com/api/elements'
 r = requests.post(the_url, data=data)
 print(r.status_code)
