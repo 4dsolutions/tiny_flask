@@ -37,6 +37,8 @@ Jinja2 templates
    elem_page.html
    all_elems.html 
    glossary.html
+   all_terms.html
+   term_page.html
 """
 
 import requests
@@ -47,7 +49,7 @@ data["symbol"]="Zn"
 data["long_name"]="Zinc"
 data["mass"]=65.38
 data["series"]="Transition metal"
-data["secret"]="DANyoob" # <--- primitive authentication
+data["secret"]="***" # <--- primitive authentication
 
 # the_url = 'http://localhost:5000/api/elements'
 the_url = 'http://thekirbster.pythonanywhere.com/api/elements'
