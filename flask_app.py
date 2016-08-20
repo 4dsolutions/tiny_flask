@@ -5,7 +5,8 @@ Created on Fri Jul 29 11:28:57 2016
 @author: Kirby Urner
 """
 from flask import Flask, request, render_template
-from connectors2 import Connector, elemsDB, glossaryDB, DB1, DB2
+from connectors2 import Connector, elemsDB, glossaryDB, shapesDB
+from connectors2 import DB1, DB2, DB3
 import json
 import collections
 
@@ -56,6 +57,8 @@ def get_elements():
                 result = dbx.save(request.form)
             return result
         return "Oooo, you tried to post!"
+
+#--------------------------------------------------
         
 @app.route("/glossary")
 def glossary():
@@ -93,7 +96,53 @@ def get_terms():
                 result = dbx.save(request.form)
             return result
         return "Oooo, you tried to post!"
-        
+    
+#--------------------------------------------------  
+
+@app.route("/shapes")
+def shapes():
+    return render_template("shapes.html")
+
+@app.route("/shapes/<abbrev>")
+def get_polyhedrons(abbrev):
+    with Connector(shapesDB(DB3)) as dbx:
+        result = dbx.seek(abbrev)
+    if "NOT FOUND" != result:
+        if abbrev != 'all':
+            data = json.loads(result)
+            return render_template("shape_page.html", 
+                                shape_id = data[0],
+                                shape = data[1],
+                                abbrev = data[2],
+                                shape_v = data[3],
+                                shape_f = data[4],
+                                shape_e = data[5],
+                                shape_dual_id = data[6],
+                                shape_volume = data[7])
+        else:
+            data = json.loads(result)
+            data = collections.OrderedDict(sorted(data.items(), 
+                                            key=lambda k: k[1][0]))
+            return render_template("all_shapes.html", the_data=data)
+
+@app.route("/api/shapes", methods=['GET', 'POST'])
+def get_shapes():
+    if request.method == "GET":
+        term = request.args.get('shape')
+        result="NOT FOUND"
+        with Connector(shapesDB(DB3)) as dbx:
+            result = dbx.seek(term) 
+        if result != "NOT FOUND":
+            return result
+        return render_template("shapes.html")
+    if request.method == "POST":
+        if request.form["secret"]=="DADA":
+            with Connector(shapesDB(DB3)) as dbx:
+                result = dbx.save(request.form)
+            return result
+        return "Oooo, you tried to post!"
+    
+          
 if __name__ == '__main__':
     app.run(port=5000, debug=True)
 
