@@ -91,6 +91,7 @@ def get_terms():
             return result
         return render_template("terms.html")
     if request.method == "POST":
+        print("Posting to glossary")
         if request.form["secret"]=="DADA":
             with Connector(glossaryDB(DB2)) as dbx:
                 result = dbx.save(request.form)
@@ -141,7 +142,10 @@ def get_shapes():
                 result = dbx.save(request.form)
             return result
         return "Oooo, you tried to post!"
-    
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template("home.html")
           
 if __name__ == '__main__':
     app.run(port=5000, debug=True)
