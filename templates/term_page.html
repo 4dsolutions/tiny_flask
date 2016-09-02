@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+{% block title %}Glossary {{ the_term }}{% endblock %}
+{% block head %}
+    {{ super() }}
+	<link rel="stylesheet" type="text/css" href="../static/css/any_term.css">
+    <title></title>
+{% endblock %}
+{% block content %}
+<h4>{{ the_term }}</h4>
+<span class="term_data">
+<br/>Definition: {{the_definition}}
+</span>
+{% endblock %}

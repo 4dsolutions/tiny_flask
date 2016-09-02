@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+{% block title %}All Elements in the Database{% endblock %}
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="../static/css/any_elem.css">
+{% endblock %}
+{% block content %}
+<h4>All the elements</h4>
+<table>
+<tr>
+	<th>Element</th>
+	<th>Protons</th>
+	<th>Mass</th>
+	<th>Series</th>
+</tr>
+{% for item in the_data.items() %}
+<tr>
+   	<td>{{ item[1][2] }} ({{ item[1][1] }})</td>
+   	<td>{{ item[1][0] }}</td>
+   	<td>{{ item[1][3] }}</td>
+   	<td>{{ item[1][4] }}</td>
+</tr>
+{% endfor %}
+</table>
+{% endblock %}

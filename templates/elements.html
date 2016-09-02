@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+{% block title %}Chemical Elements{% endblock %}
+{% block head %}
+    {{ super() }}
+	<link rel="stylesheet" type="text/css" href="../static/css/home.css">
+{% endblock %}
+{% block content %}
+<div id="main">
+    <h4>API: ELEMENTS</h4>
+    <br />(<i>HTML views</i>)<br />
+    <br /><a href="/elements">/elements</a>
+    <br /><a href="/elements/H">/elements/H</a>
+    <br /><a href="/elements/Si">/elements/Si</a>
+    <br />...
+    <br /><a href="/elements/all">/elements/all</a>
+    <br />
+    <br />(<i>JSON output</i>)<br />
+    <br /><a href="/api/elements?elem=H">/api/elements?elem=H</a>
+    <br /><a href="/api/elements?elem=O">/api/elements?elem=O</a>
+    <br />...
+    <br /><a href="/api/elements?elem=all">/api/elements?elem=all</a>
+</div>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+{% block title %}API: Glossary{% endblock %}
+{% block head %}
+    {{ super() }}		
+    <link rel="stylesheet" type="text/css" href="../static/css/home.css">
+{% endblock %}
+{% block content %}
+<div id="main">
+    <h4>API: GLOSSARY</h4>
+<br />
+    (<i>HTML views</i>)<br />
+    <br /><a href="/glossary">/glossary</a>
+    <br /><a href="/glossary/AJAX">/glossary/AJAX</a>
+    <br /><a href="/glossary/all">/glossary/all</a>
+<br />
+<br />
+    (<i>JSON output</i>)<br />
+    <br /><a href="/api/glossary?term=.NET">/api/glossary?term=.NET</a>
+    <br /><a href="/api/glossary?term=AJAX">/api/glossary?term=AJAX</a>
+    <br /><a href="/api/glossary?term=all">/api/glossary?term=all</a>
+<br />
+</div>
+{% endblock %}
