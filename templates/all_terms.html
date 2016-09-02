@@ -1,10 +1,10 @@
-<!DOCTYPE html>
-<html>
-    <head>
+{% extends "layout.html" %}
+{% block title %}All Terms in the Glossary{% endblock %}
+{% block head %}
+    {{ super() }}
     	<link rel="stylesheet" type="text/css" href="../static/css/any_term.css">
-        <title>All Terms in the Glossary</title>
-    </head>
-<body>
+{% endblock %}
+{% block content %}
 <h4>All the terms</h4>
 <table>
 <tr><th>Term</th><th>Definition</th></tr>
@@ -15,5 +15,4 @@
 </tr>
 {% endfor %}
 </table>
-</body>
-</html>
+{% endblock %}

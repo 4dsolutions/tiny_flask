@@ -1,10 +1,10 @@
-<!DOCTYPE html>
-<html>
-<head>
+{% extends "layout.html" %}
+{% block title %}Polyhedron {{ shape }}{% endblock %}
+{% block head %}
+    {{ super() }}
 	<link rel="stylesheet" type="text/css" href="../static/css/any_shape.css">
-    <title>Polyhedron {{ shape }}</title>
-</head>
-<body>
+{% endblock %}
+{% block content %}
 <h4>{{ the_term }}</h4>
 <span class="shape_data">
 <br/>Name: {{shape}}
@@ -16,5 +16,4 @@
 <br />
 </span>
 ** <a href="http://worldgame.blogspot.com/2016/07/another-introduction-to-tetravolumes.html">tetravolumes</a>
-</body>
-</html>
+{% endblock %}

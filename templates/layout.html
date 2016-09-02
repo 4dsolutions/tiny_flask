@@ -1,0 +1,19 @@
+<!doctype html>
+<html>
+  <head>
+    {% block head %}
+    <title>{% block title %}{% endblock %} - OCN Flask</title>
+    {% endblock %}
+  </head>
+  <body onload="sponsored_by()"> 
+    <div id="content">{% block content %}{% endblock %}</div>
+    <div id="footer">
+      {% block footer %}   
+      <br />
+      <br /> 
+      &copy; Copyleft 2016 by <a href="http://4dsolutions.net/">K. T. Urner</a>.
+      {% endblock %}
+    </div>
+   
+  </body>
+</html>

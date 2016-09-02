@@ -1,10 +1,11 @@
-<!DOCTYPE html>
-<html>
-    <head>
+{% extends "layout.html" %}
+{% block title %}Shapes Page{% endblock %}
+{% block head %}
+    {{ super() }}
 		<link rel="stylesheet" type="text/css" href="../static/css/home.css">
         <title>Polyhedrons in Inventory</title>
-    </head>
-<body>
+{% endblock %}
+{% block content %}
 <div id="main">
     <h4>API: SHAPES</h4>
     <br />(<i>HTML views</i>)<br />
@@ -58,5 +59,4 @@ off2pov -Oa -E xFF4500 -B0 -o testfile.pov testfile.off
 povray -itestfile.pov +FN +A0.4 +W1280 +H960
 	</pre>
 </div>
-</body>
-</html>
+{% endblock %}

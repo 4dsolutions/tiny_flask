@@ -1,10 +1,10 @@
-<!DOCTYPE html>
-<html>
-    <head>
-		<link rel="stylesheet" type="text/css" href="../static/css/home.css">
-        <title>API: Glossary</title>
-    </head>
-<body>
+{% extends "layout.html" %}
+{% block title %}API: Glossary{% endblock %}
+{% block head %}
+    {{ super() }}		
+    <link rel="stylesheet" type="text/css" href="../static/css/home.css">
+{% endblock %}
+{% block content %}
 <div id="main">
     <h4>API: GLOSSARY</h4>
 <br />
@@ -20,5 +20,4 @@
     <br /><a href="/api/glossary?term=all">/api/glossary?term=all</a>
 <br />
 </div>
-</body>
-</html>
+{% endblock %}

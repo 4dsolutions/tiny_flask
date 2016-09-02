@@ -1,10 +1,9 @@
-<!DOCTYPE html>
-<html>
-    <head>
-    	<link rel="stylesheet" type="text/css" href="../static/css/any_elem.css">
-        <title>All Elements in the Database</title>
-    </head>
-<body>
+{% extends "layout.html" %}
+{% block title %}All Elements in the Database{% endblock %}
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="../static/css/any_elem.css">
+{% endblock %}
+{% block content %}
 <h4>All the elements</h4>
 <table>
 <tr>
@@ -22,5 +21,4 @@
 </tr>
 {% endfor %}
 </table>
-</body>
-</html>
+{% endblock %}

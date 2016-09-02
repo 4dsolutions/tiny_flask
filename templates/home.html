@@ -1,11 +1,11 @@
-<!DOCTYPE html>
-<html>
-    <head>
+{% extends "layout.html" %}
+{% block title %}A RESTful Flask App{% endblock %}
+{% block head %}
+    {{ super() }}
 	<link rel="stylesheet" type="text/css" href="../static/css/home.css">
     <script src="../static/js/home.js"></script>
-        <title>A RESTful Flask App</title>
-    </head>
- <body onload="sponsored_by()"> 
+{% endblock %}
+{% block content %}
  	<div id="main">
 
  	 <div align="center">
@@ -57,5 +57,4 @@
 	<br />
 	<span id="sponsor"></span>
 	</div>
-</body>
-</html>
+{% endblock %}
