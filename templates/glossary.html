@@ -6,18 +6,27 @@
 {% endblock %}
 {% block content %}
 <div id="main">
+    <div class="dashboard">
+    <button class="button" onclick="goHome()">Home</button>
+    <button class="button" onclick="goElements()">Elements</button>
+    <button class="button" onclick="goShapes()">Shapes</button>
+    </div>
     <h4>API: GLOSSARY</h4>
 <br />
-    (<i>HTML views</i>)<br />
+    <table class="table">
+    <tr>
+    <td width="50%">
+    <i>HTML views</i><br />
     <br /><a href="/glossary">/glossary</a>
     <br /><a href="/glossary/AJAX">/glossary/AJAX</a>
     <br /><a href="/glossary/all">/glossary/all</a>
-<br />
-<br />
-    (<i>JSON output</i>)<br />
+    </td>
+    <td width="50%">
+    <i>JSON output</i><br />
     <br /><a href="/api/glossary?term=.NET">/api/glossary?term=.NET</a>
     <br /><a href="/api/glossary?term=AJAX">/api/glossary?term=AJAX</a>
     <br /><a href="/api/glossary?term=all">/api/glossary?term=all</a>
+    </table>
 <br />
 </div>
 {% endblock %}

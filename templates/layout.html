@@ -1,7 +1,9 @@
 <!doctype html>
 <html>
   <head>
-    {% block head %}
+    {% block head %}    
+    <script src="../static/js/home.js"></script>
+	<link rel="stylesheet" type="text/css" href="../static/css/home.css">
     <title>{% block title %}{% endblock %} - OCN Flask</title>
     {% endblock %}
   </head>
@@ -13,7 +15,6 @@
       <br /> 
       &copy; Copyleft 2016 by <a href="http://4dsolutions.net/">K. T. Urner</a>.
       {% endblock %}
-    </div>
-   
+    </div>   
   </body>
 </html>
