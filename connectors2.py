@@ -13,6 +13,8 @@ import math
 
 phi = (math.sqrt(5)+1)/2.0
 
+SECRET = "DADA"
+
 # PATH = "/Users/kurner/Documents/classroom_labs/session10"
 PATH = "/Users/kurner/Documents/workspace/TinyFlaskApp/src"
 DB1 = os.path.join(PATH, 'periodic_table.db')
@@ -71,7 +73,7 @@ class elemsDB:
         return "NOT FOUND"
 
     def update(self, the_data):
-        if self.conn:
+        if self.conn and the_data["secret"] == SECRET:
             d = {}
             # might be a form, might be some kind of dict
             try:
@@ -95,7 +97,7 @@ class elemsDB:
          
     def save(self, the_data):
         elem = the_data["symbol"]
-        if self.conn:
+        if self.conn and the_data["secret"] == SECRET:
             query = ("SELECT * FROM Elements "
             "WHERE elem_symbol = '{}'".format(elem))
             self.curs.execute(query)
@@ -158,7 +160,7 @@ class glossaryDB:
         return "NOT FOUND"
 
     def update(self, the_data):
-        if self.conn:
+        if self.conn and the_data["secret"] == SECRET:
             d = {}
             # might be a form, might be some kind of dict
             try:
@@ -182,7 +184,7 @@ class glossaryDB:
     def save(self, the_data):
         term = the_data["gl_term"]
         print("save glossary term...")
-        if self.conn:
+        if self.conn and the_data["secret"] == SECRET:
             query = ("SELECT * FROM Glossary "
             "WHERE gl_term = '{}'".format(term))
             self.curs.execute(query)
@@ -288,7 +290,7 @@ class shapesDB:
         return "NOT FOUND"
 
     def update(self, the_data):
-        if self.conn:
+        if self.conn and the_data["secret"] == SECRET:
             d = {}
             # might be a form, might be some kind of dict
             try:
@@ -312,7 +314,7 @@ class shapesDB:
         
     def save(self, the_data):
         term = the_data["abbrev"]
-        if self.conn:
+        if self.conn and the_data["secret"] == SECRET:
             query = ("SELECT * FROM Shapes "
             "WHERE abbrev = '{}'".format(term))
             self.curs.execute(query)
