@@ -9,7 +9,6 @@ import os.path
 import json
 import time
 from contextlib import contextmanager
-from collections import OrderedDict
 import math
 
 phi = (math.sqrt(5)+1)/2.0
@@ -70,7 +69,30 @@ class elemsDB:
                     result[row[1]] = list(row)
                 return json.dumps(result)                
         return "NOT FOUND"
-     
+
+    def update(self, the_data):
+        if self.conn:
+            d = {}
+            # might be a form, might be some kind of dict
+            try:
+                d.update(the_data.to_dict(flat=True)) # the_data is immutable
+            except AttributeError:
+                d.update(the_data)
+            d["initials"]="KTU"
+            d["right_now"]=mod_date()
+            query = ("UPDATE Elements "
+            "SET elem_protons = {protons}, elem_long_name = '{long_name}', "  
+            "elem_mass = {mass}, elem_series = '{series}', "
+            "updated_at = {right_now}, updated_by = '{initials}' WHERE elem_symbol = '{symbol}'")
+            query = query.format(**d)
+            print(query)
+            self.curs.execute(query)
+            self.conn.commit()
+            return "UPDATE SUCCESSFUL"
+        else:
+            print("NO CONNECTION")
+        return "NOT FOUND"
+         
     def save(self, the_data):
         elem = the_data["symbol"]
         if self.conn:
@@ -134,7 +156,29 @@ class glossaryDB:
                     result[row[1]] = list(row)
                 return json.dumps(result)                
         return "NOT FOUND"
-    
+
+    def update(self, the_data):
+        if self.conn:
+            d = {}
+            # might be a form, might be some kind of dict
+            try:
+                d.update(the_data.to_dict(flat=True)) # the_data is immutable
+            except AttributeError:
+                d.update(the_data)
+            d["initials"]="KTU"
+            d["right_now"]=mod_date()
+            query = ("UPDATE Glossary "
+            "SET gl_definition = '{gl_definition}', "  
+            "updated_at = {right_now}, updated_by = '{initials}' WHERE gl_term = '{gl_term}'")
+            query = query.format(**d)
+            print(query)
+            self.curs.execute(query)
+            self.conn.commit()
+            return "UPDATE SUCCESSFUL"
+        else:
+            print("NO CONNECTION")
+        return "NOT FOUND"
+        
     def save(self, the_data):
         term = the_data["gl_term"]
         print("save glossary term...")
@@ -242,7 +286,30 @@ class shapesDB:
                     result[row[1]] = list(row)
                 return json.dumps(result)                
         return "NOT FOUND"
-    
+
+    def update(self, the_data):
+        if self.conn:
+            d = {}
+            # might be a form, might be some kind of dict
+            try:
+                d.update(the_data.to_dict(flat=True)) # the_data is immutable
+            except AttributeError:
+                d.update(the_data)
+            d["initials"]="KTU"
+            d["right_now"]=mod_date()
+            query = ("UPDATE Shapes "
+            "SET shape = '{shape}', abbrev = '{abbrev}', shape_v = {shape_v}, shape_e = {shape_e}, "
+            "shape_f = {shape_f}, shape_volume = {shape_volume}, "  
+            "updated_at = {right_now}, updated_by = '{initials}' WHERE shape_id = {shape_id}")
+            query = query.format(**d)
+            print(query)
+            self.curs.execute(query)
+            self.conn.commit()
+            return "UPDATE SUCCESSFUL"
+        else:
+            print("NO CONNECTION")
+        return "NOT FOUND"
+        
     def save(self, the_data):
         term = the_data["abbrev"]
         if self.conn:

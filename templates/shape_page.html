@@ -5,15 +5,40 @@
 	<link rel="stylesheet" type="text/css" href="../static/css/any_shape.css">
 {% endblock %}
 {% block content %}
-<h4>{{ the_term }}</h4>
-<span class="shape_data">
-<br/>Name: {{shape}}
-<br/>V: {{shape_v}}
-<br/>F: {{shape_f}}
-<br/>E: {{shape_e}}
-<br/>Vol **: {{shape_volume}}
-<br/>Dual ID: {{shape_dual_id}}
+<div id="main">
+    <div class="dashboard">
+    <button class="button" onclick="goShapes()">Shapes</button>
+    <button class="button" onclick="goHome()">Home</button>
+    </div>
+<h4>{{ shape }}</h4>
+<table>
+<tr><td>
+<form id="the_form" action="/shapes/{{abbrev}}" method="post" >
+	<input type="hidden" name="shape_id" value="{{shape_id}}">
+	Name:<br /> 
+	<input class="editable" type="text" name="shape" value="{{shape}}" size="20" disabled><br /> 
+	<br />Abbreviation:<br /> 
+	<input class="editable" type="text" name="abbrev" value="{{abbrev}}" size="20" disabled><br /> 
+	<br />Vertexes:<br /> 
+	<input class="editable"  type="text" name="shape_v" value="{{shape_v}}" size="20" disabled><br /> 
+	<br/>Faces:<br /> 
+	<input class="editable" type="text" name="shape_f" value="{{shape_f}}" size="20" disabled><br /> 
+	<br/>Edges:<br /> 
+	<input class="editable" type="text" name="shape_e" value="{{shape_e}}" size="20" disabled><br /> 
+	<br/>Volume *:<br /> 
+	<input class="editable" type="text" name="shape_volume" value="{{shape_volume}}" size="20" disabled><br /> 
+	<input type="hidden" name="secret" value="DADA">
+</form>
+</td>
+<td>
+<button id="Edit" class="button data" onclick="EditMe()">Edit</button><br />
+<button id="Delete" class="button data" onclick="DeleteMe()">Delete</button><br />
+<button id="Add" class="button data" onclick="AddMe()">Add</button><br />
 <br />
-</span>
-** <a href="http://worldgame.blogspot.com/2016/07/another-introduction-to-tetravolumes.html">tetravolumes</a>
+</td>
+</tr>
+</table>
+<br />
+* <a href="http://worldgame.blogspot.com/2016/07/another-introduction-to-tetravolumes.html">tetravolumes</a>
+</div>
 {% endblock %}

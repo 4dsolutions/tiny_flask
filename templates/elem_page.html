@@ -5,10 +5,34 @@
 	<link rel="stylesheet" type="text/css" href="../static/css/any_elem.css">
 {% endblock %}
 {% block content %}
+<div id="main">
+    <div class="dashboard">
+    <button class="button" onclick="goElements()">Elements</button>
+    <button class="button" onclick="goHome()">Home</button>
+    </div>
 <h4>{{ elem }}: {{long_name}}</h4>
-<span class="elem_data">
-<br/>Protons: {{protons}}
-<br/>Mass: {{mass}}
-<br/>Series: {{series}}
-</span>
+<table>
+<tr><td>
+<form id="the_form" action="/elements/{{elem}}" method="post" >
+	<input type="hidden" name="symbol" value="{{elem}}">
+	Chemical Name:<br /> 
+	<input class="editable" type="text" name="long_name" value="{{long_name}}" size="20" disabled><br /> 
+	<br />Protons:<br /> 
+	<input class="editable" type="text" name="protons" value="{{protons}}" size="20" disabled><br /> 
+	<br/>Mass:<br /> 
+	<input class="editable" type="text" name="mass" value="{{mass}}" size="20" disabled><br /> 
+	<br/>Series:<br /> 
+	<input class="editable" type="text" name="series" value="{{series}}" size="20" disabled><br /> 
+	<input type="hidden" name="secret" value="DADA">
+</form>
+</td>
+<td>
+<button id="Edit" class="button data" onclick="EditMe()">Edit</button><br />
+<button id="Delete" class="button data" onclick="DeleteMe()">Delete</button><br />
+<button id="Add" class="button data" onclick="AddMe()">Add</button><br />
+<br />
+</td>
+</tr>
+</table>
+</div>
 {% endblock %}

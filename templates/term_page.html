@@ -6,8 +6,30 @@
     <title></title>
 {% endblock %}
 {% block content %}
+<div id="main">
+    <div class="dashboard">
+    <button class="button" onclick="goTerms()">Terms</button>
+    <button class="button" onclick="goHome()">Home</button>
+    </div>
 <h4>{{ the_term }}</h4>
-<span class="term_data">
-<br/>Definition: {{the_definition}}
-</span>
+<table>
+<tr><td width="100%">
+<form id="the_form" action="/glossary/{{the_term}}" method="post" >
+	Term:<br /> 
+	<input type="text" name="gl_term" value="{{the_term}}" size="20" readonly><br /> 
+	<br />Definition:<br /> 
+	<textarea class="editable" form="the_form" cols="80" rows="8" name="gl_definition" wrap="soft" disabled>{{the_definition}}</textarea><br />  
+	<input type="hidden" name="secret" value="DADA">
+</form>
+</td>
+<tr>
+<td>
+<button id="Edit" class="button data" onclick="EditMe()">Edit</button>
+<button id="Delete" class="button data" onclick="DeleteMe()">Delete</button>
+<button id="Add" class="button data" onclick="AddMe()">Add</button>
+<br />
+</td>
+</tr>
+</table>
+</div>
 {% endblock %}

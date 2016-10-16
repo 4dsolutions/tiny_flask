@@ -20,8 +20,14 @@ def index():
 def elements():
     return render_template("elements.html")
 
-@app.route("/elements/<symbol>")
+@app.route("/elements/<symbol>", methods=['GET', 'POST'])
 def element_page(symbol):
+
+    if request.method == "POST":
+        with Connector(elemsDB(DB1)) as dbx:
+            result = dbx.update(request.form) 
+            print(result)
+                                           
     with Connector(elemsDB(DB1)) as dbx:
         result = dbx.seek(symbol)
     if "NOT FOUND" != result:
@@ -64,8 +70,14 @@ def get_elements():
 def glossary():
     return render_template("glossary.html")
 
-@app.route("/glossary/<term>")
+@app.route("/glossary/<term>",  methods=['GET', 'POST'])
 def get_glossary(term):
+    if request.method == "POST":
+        print("POSTING DATA!!")
+        with Connector(glossaryDB(DB2)) as dbx:
+            result = dbx.update(request.form) 
+            print(result)
+            
     with Connector(glossaryDB(DB2)) as dbx:
         result = dbx.seek(term)
     if "NOT FOUND" != result:
@@ -79,6 +91,8 @@ def get_glossary(term):
             data = collections.OrderedDict(sorted(data.items(), 
                                             key=lambda k: k[1][0]))
             return render_template("all_terms.html", the_data=data)
+        
+    return render_template("glossary.html")
 
 @app.route("/api/glossary", methods=['GET', 'POST'])
 def get_terms():
@@ -104,10 +118,17 @@ def get_terms():
 def shapes():
     return render_template("shapes.html")
 
-@app.route("/shapes/<abbrev>")
+@app.route("/shapes/<abbrev>",  methods=['GET', 'POST'])
 def get_polyhedrons(abbrev):
+    if request.method == "POST":
+        print("POSTING DATA!!")
+        with Connector(shapesDB(DB3)) as dbx:
+            result = dbx.update(request.form) 
+            print(result)
+            
     with Connector(shapesDB(DB3)) as dbx:
         result = dbx.seek(abbrev)
+        
     if "NOT FOUND" != result:
         if abbrev != 'all':
             data = json.loads(result)
@@ -125,6 +146,8 @@ def get_polyhedrons(abbrev):
             data = collections.OrderedDict(sorted(data.items(), 
                                             key=lambda k: k[1][0]))
             return render_template("all_shapes.html", the_data=data)
+        
+    return render_template("shapes.html")
 
 @app.route("/api/shapes", methods=['GET', 'POST'])
 def get_shapes():
