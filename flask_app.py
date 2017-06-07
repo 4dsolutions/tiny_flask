@@ -20,6 +20,10 @@ def index():
 def elements():
     return render_template("elements.html")
 
+@app.route("/links")
+def links():
+    return render_template("links.html")
+
 @app.route("/elements/<symbol>", methods=['GET', 'POST'])
 def element_page(symbol):
 
