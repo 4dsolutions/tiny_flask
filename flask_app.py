@@ -6,11 +6,30 @@ Created on Fri Jul 29 11:28:57 2016
 """
 from flask import Flask, request, render_template
 from connectors2 import Connector, elemsDB, glossaryDB, shapesDB
+from jsonrpc.backend.flask import api
 from connectors2 import DB1, DB2, DB3
 import json
 import collections
 
 app = Flask(__name__)
+app.register_blueprint(api.as_blueprint())
+app.add_url_rule('/', 'api', api.as_view(), methods=['POST'])
+
+#========= TESTING json-rpc ==============
+
+@api.dispatcher.add_method
+def foobar(arg):
+    if request.method == "POST":
+        print("RPC API!")
+    return json.dumps({"message":"success", "procedure":"foobar"})
+
+@api.dispatcher.add_method
+def tetrahedron(*arg):
+    if request.method == "POST":
+        print("RPC API!")
+    return json.dumps({"message":"success", "procedure":"tetrahedron"})
+
+#========= END TESTING ==============
 
 @app.route("/")
 def index():
