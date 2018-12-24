@@ -16,7 +16,7 @@ phi = (math.sqrt(5)+1)/2.0
 SECRET = "DADA"
 
 # PATH = "/Users/kurner/Documents/classroom_labs/session10"
-PATH = "/Users/kurner/Documents/workspace/TinyFlaskApp/src"
+PATH = "/Users/mac/Documents/tiny_flask"
 DB1 = os.path.join(PATH, 'periodic_table.db')
 DB2 = os.path.join(PATH, 'glossary.db')
 DB3 = os.path.join(PATH, 'polyhedrons.db')
@@ -33,6 +33,7 @@ def Connector(db):
     except Exception as oops:
         if oops:
             print("Not connecting to", db.db_name)
+            print("You likely need to change the absolute path on line 19 of connectors2.py")
             raise
     db.conn.close()
 
@@ -161,7 +162,7 @@ class glossaryDB:
                 self.curs.execute(query)
                 result={}
                 for row in self.curs.fetchall():
-                    result[row[1]] = list(row)
+                    result[row[0]] = list(row[1:])
                 return json.dumps(result)                
         return "NOT FOUND"
 
