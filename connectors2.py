@@ -40,6 +40,9 @@ class elemsDB:
     
     def __init__(self, db_name):
         self.db_name = db_name
+        # initialized by Connector
+        self.conn = None
+        self.curs = None
 
     def _create_table(self):
         # used outside of web serving mode
@@ -130,6 +133,9 @@ class glossaryDB:
     
     def __init__(self, db_name):
         self.db_name = db_name
+        # initialized by Connector
+        self.conn = None
+        self.curs = None
 
     def _create_table(self):
         # used outside of web serving mode
@@ -215,6 +221,9 @@ class shapesDB:
     
     def __init__(self, db_name):
         self.db_name = db_name
+        # initialized by Connector
+        self.conn = None
+        self.curs = None
 
     def _create_table(self):
         # used outside of web serving mode
