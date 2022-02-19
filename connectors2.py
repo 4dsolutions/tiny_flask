@@ -18,6 +18,7 @@ SECRET = "DADA"
 # PATH = "/Users/kurner/Documents/classroom_labs/session10"
 # PATH = "/Users/kurner/Documents/workspace/TinyFlaskApp/src"
 PATH = "."
+# PATH = "/Users/mac/Documents/tiny_flask"
 DB1 = os.path.join(PATH, 'periodic_table.db')
 DB2 = os.path.join(PATH, 'glossary.db')
 DB3 = os.path.join(PATH, 'polyhedrons.db')
@@ -34,6 +35,7 @@ def Connector(db):
     except Exception as oops:
         if oops:
             print("Not connecting to", db.db_name)
+            print("You likely need to change the absolute path on line 19 of connectors2.py")
             raise
     db.conn.close()
 
@@ -41,6 +43,9 @@ class elemsDB:
     
     def __init__(self, db_name):
         self.db_name = db_name
+        # initialized by Connector
+        self.conn = None
+        self.curs = None
 
     def _create_table(self):
         # used outside of web serving mode
@@ -131,6 +136,9 @@ class glossaryDB:
     
     def __init__(self, db_name):
         self.db_name = db_name
+        # initialized by Connector
+        self.conn = None
+        self.curs = None
 
     def _create_table(self):
         # used outside of web serving mode
@@ -156,7 +164,7 @@ class glossaryDB:
                 self.curs.execute(query)
                 result={}
                 for row in self.curs.fetchall():
-                    result[row[1]] = list(row)
+                    result[row[0]] = list(row[1:])
                 return json.dumps(result)                
         return "NOT FOUND"
 
@@ -216,6 +224,9 @@ class shapesDB:
     
     def __init__(self, db_name):
         self.db_name = db_name
+        # initialized by Connector
+        self.conn = None
+        self.curs = None
 
     def _create_table(self):
         # used outside of web serving mode
