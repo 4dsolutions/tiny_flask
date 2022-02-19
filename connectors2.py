@@ -16,7 +16,8 @@ phi = (math.sqrt(5)+1)/2.0
 SECRET = "DADA"
 
 # PATH = "/Users/kurner/Documents/classroom_labs/session10"
-PATH = "/Users/kurner/Documents/workspace/TinyFlaskApp/src"
+# PATH = "/Users/kurner/Documents/workspace/TinyFlaskApp/src"
+PATH = "."
 DB1 = os.path.join(PATH, 'periodic_table.db')
 DB2 = os.path.join(PATH, 'glossary.db')
 DB3 = os.path.join(PATH, 'polyhedrons.db')
