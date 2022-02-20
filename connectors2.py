@@ -160,11 +160,11 @@ class glossaryDB:
                 if result:
                     return json.dumps(list(result))
             else:
-                query = "SELECT * FROM Glossary ORDER BY gl_term"
+                query = "SELECT gl_term, gl_definition FROM Glossary ORDER BY gl_term"
                 self.curs.execute(query)
-                result={}
+                result=dict()
                 for row in self.curs.fetchall():
-                    result[row[0]] = list(row[1:])
+                    result[row[0]] = row[1]
                 return json.dumps(result)                
         return "NOT FOUND"
 

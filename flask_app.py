@@ -110,9 +110,9 @@ def get_glossary(term):
                                 the_term = data[0],
                                 the_definition = data[1])
         else:
+            print(result)
             data = json.loads(result)
-            data = collections.OrderedDict(sorted(data.items(), 
-                                            key=lambda k: k[1][0]))
+            data = dict(sorted(data.items(), key=lambda k: k[0]))
             return render_template("all_terms.html", the_data=data)
         
     return render_template("glossary.html")
