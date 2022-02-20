@@ -8,7 +8,7 @@
 <h4>All the terms</h4>
 <table>
 <tr><th>Term</th><th>Definition</th></tr>
-{% for item in the_data.items() %}
+{% for item in the_data.items() | sort(attribute = '0') %}
 <tr>
    <td>{{ item[0] }}</td>
    <td>{{ item[1] }}</td>
